@@ -1,0 +1,26 @@
+Powstałe aplikacje uruchamiane są w trybie developerskim.
+
+Przed próbą uruchomienia aplikacji należy upewnić się że posiadamy pobrane biblioteki Python'a niezbędne do jej uruchomienia:
+- Flask
+- Flask-login
+- Flask-admin
+- Flask-SQLAlchemy
+- gettext
+- werkzeug
+- ssl
+
+Aplikacje webowe do swojego poprawnego działania wymagają połączenia z bazą danych MySQL.
+Oprogramowanie bazy danych MySQL można pobrać pod linkiem: https://www.mysql.com/downloads/
+W podfolderze dla każdej z aplikacji został umieszczony dodatkowy folder o nazwie "MySQL". W tym folderze znajdują się pliki .mwb, .sql oraz .txt.
+Pliki .mwb są plikami MySQL Workbench dzięki którym możemy zobaczyć model fizyczny bazy danych dla poszczególnych aplikacji.
+Pliki .sql zawierają w sobie skrypt do utworzenia w DBMS nowej bazy danych dla poszczególnych aplikacji.
+Pliki .txt zawierają w sobie informacje na temat nazw, haseł oraz uprawnień użytkowników dla poszczególnych aplikacji.
+
+Po implementacji informacji z plików .sql oraz .txt aplikacja ustanowi połączenie z bazą danych.
+
+Po instalacji wyżej wymienionych bibliotek oraz konfiguracji bazy danych, należy uruchomić plik main.py znajdujący się folderze wybranej aplikacji, za pomocą interpretera Python.
+
+W przypadku aplikacji znajdujących się w folderach aplikacja_z_parametryzacją_zapytań oraz aplikacja_z_podziałem_między_dwie_bazy_danych, 
+przed uruchomieniem należy wskazać w pliku "main.py" ścieżkę do plików "cert.pem" oraz "key.pem", znajdujących się w katalogu głównym.
+
+W ten sposób skonfigurowane aplikacje mogą posłużyć do prezentacji ataków SQL Injection.

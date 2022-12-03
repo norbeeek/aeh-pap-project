@@ -1,0 +1,49 @@
+version: '3.11'
+
+networks:
+  backend:
+
+volumes:
+  flask-app-cache:
+  dbstore:
+
+services:
+  db:
+    container_name: mysql-db
+    image: "mysql:8.0"
+    restart: "no"
+    ports:
+#      - "3307:3306"
+      - "3307:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: library3
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+    volumes:
+      - "./db/init.sql:/docker-entrypoint-initdb.d/init.sql"
+      - "dbstore:/var/lib/mysql"
+    networks:
+      backend:
+
+
+  app:
+    container_name: flask-app
+    restart: "no"
+    build:
+      context: ./
+      dockerfile: ./Dockerfile
+    ports:
+      - "9000:9000"
+    links:
+      - db
+    volumes:
+      - "./:/app"
+      - "flask-app-cache:/root/.cache/pip"
+    environment:
+      PYTHONPATH: /app
+      UNI_DATABASE_URI: mysql://user:password@db:3307/library3
+    networks:
+      backend:
+    depends_on:
+      - db
