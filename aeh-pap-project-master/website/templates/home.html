@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+{% block title %}Home{% endblock %}
+
+{% block username %}
+<ul class="navbar-nav ml-auto">
+    <li class="nav-item">
+        <a class="nav-link" href="#">Hi, {{ user.name }}</a>
+    </li>
+</ul>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col md-12">
+
+            <div class="jumbotron p-3">
+
+                <h1><b>Books </b></h1>
+            <h3 align="center">Search for book</h3>
+            <form class="form-inline" method="POST">
+              <div class="form-group">
+                <input
+                  type="tytul"
+                  class="form-control"
+                  id="tytul"
+                  name="tytul"
+                  placeholder="Search by title"
+                  value="{{ request.form['tytul'] }}"
+                />
+              </div>
+              <div class="form-group">
+                <input
+                  type="imie"
+                  class="form-control"
+                  id="imie"
+                  name="imie"
+                  placeholder="Search by name"
+                  value="{{ request.form['imie'] }}"
+                />
+              </div>
+              <div class="form-group">
+                <input
+                  type="nazwisko"
+                  class="form-control"
+                  id="nazwisko"
+                  name="nazwisko"
+                  placeholder="Search by surname"
+                  value="{{ request.form['nazwisko'] }}"
+                />
+              </div>
+              <br />
+              <button type="submit" class="btn btn-primary" style="margin-left:5em; margin-bottom:2.5em; margin-top:2.5em;">Search</button>
+            </form>
+            <table class="table table-hover table-dark">
+                <tr>
+                        <th>Book Title</th>
+                        <th>Authors First Name</th>
+                        <th>Authors Surname</th>
+                </tr>
+
+                {% for book in books %}
+                <tr>
+                    <td>{{book.BookName}}</td>
+                    <td>{{book.AuthorsFirstName}}</td>
+                    <td>{{book.AuthorsSurname}}</td>
+
+                    <td>
+                        {% if book.id in userbooks %}
+                        <span>&#9989; Favourite Book</span>
+                        {% else %}
+                        <form method ="POST" action="/manage_favourites">
+                            <button type="submit" class="btn btn-primary" name="add" value={{book.id}}> Add to favourites </button>
+                        </form>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
