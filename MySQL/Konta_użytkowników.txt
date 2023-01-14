@@ -1,0 +1,11 @@
+CREATE USER 'user2'@'localhost' IDENTIFIED BY 'user2';
+GRANT SELECT ON library3.books TO 'user2'@'localhost';
+GRANT SELECT,INSERT,DELETE ON library3.favourites TO 'user2'@'localhost';
+
+CREATE USER 'admin2'@'localhost' IDENTIFIED BY 'adminpass2';
+GRANT SELECT,INSERT,DELETE,UPDATE ON library3.books TO 'admin2'@'localhost';
+GRANT SELECT,INSERT,DELETE,UPDATE ON library3.favourites TO 'admin2'@'localhost';
+GRANT SELECT,INSERT,DELETE,UPDATE ON library3.user TO 'admin2'@'localhost';
+
+CREATE USER 'login2'@'localhost' IDENTIFIED BY 'loginpass2';
+GRANT SELECT,INSERT ON library3.user TO 'login3'@'localhost';
