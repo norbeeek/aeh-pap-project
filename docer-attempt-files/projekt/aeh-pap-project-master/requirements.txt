@@ -1,8 +1,0 @@
-flask
-flask_sqlalchemy==2.5.1
-flask_login
-flask_admin
-werkzeug
-python-gettext
-mysql-connector-python
-mysqlclient
